@@ -1,4 +1,4 @@
-package config
+package command
 
 import (
 	"github.com/pangum/pangu"
@@ -6,13 +6,6 @@ import (
 
 func init() {
 	pangu.New().Get().Dependency().Puts(
-		newGit,
-
-		newBinary,
-		newCredential,
-		newProject,
-		newPull,
-		newPush,
-		newRepository,
+		NewGit,
 	).Build().Apply()
 }
