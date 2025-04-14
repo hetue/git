@@ -3,7 +3,7 @@ module github.com/hetue/todo
 go 1.24
 
 require (
-	github.com/hetue/core v0.0.1
+	github.com/hetue/core v0.0.2
 	github.com/pangum/pangu v1.6.0
 )
 
