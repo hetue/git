@@ -1,8 +1,13 @@
-module github.com/hetue/todo
+module github.com/hetue/git
 
 go 1.24
 
 require (
+	github.com/goexl/args v0.0.3
+	github.com/goexl/exception v0.0.3
+	github.com/goexl/gfx v0.2.8
+	github.com/goexl/gox v1.9.2
+	github.com/goexl/log v0.0.9
 	github.com/hetue/core v0.0.2
 	github.com/pangum/pangu v1.6.0
 )
@@ -15,15 +20,10 @@ require (
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.26.0 // indirect
-	github.com/goexl/args v0.0.3 // indirect
 	github.com/goexl/baozheng v0.0.1 // indirect
 	github.com/goexl/env v0.0.2 // indirect
-	github.com/goexl/exception v0.0.3 // indirect
 	github.com/goexl/gex v0.4.8 // indirect
-	github.com/goexl/gfx v0.2.5 // indirect
-	github.com/goexl/gox v1.9.2 // indirect
 	github.com/goexl/guc v0.1.5 // indirect
-	github.com/goexl/log v0.0.9 // indirect
 	github.com/goexl/mengpo v0.2.6 // indirect
 	github.com/goexl/structer v0.1.9 // indirect
 	github.com/goexl/xiren v0.0.8 // indirect

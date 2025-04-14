@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/hetue/core"
-	"github.com/hetue/todo/internal"
+	"github.com/hetue/git/internal"
 )
 
 func main() {
