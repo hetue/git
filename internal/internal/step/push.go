@@ -29,15 +29,15 @@ type Push struct {
 	logger log.Logger
 }
 
-func newPush(get get.Push) *Push {
+func newPush(push get.Push) *Push {
 	return &Push{
-		repository: get.Repository,
-		project:    get.Project,
-		credential: get.Credential,
-		push:       get.Push,
+		repository: push.Repository,
+		project:    push.Project,
+		credential: push.Credential,
+		push:       push.Push,
 
-		git:    get.Git,
-		logger: get.Logger,
+		git:    push.Git,
+		logger: push.Logger,
 	}
 }
 
@@ -58,14 +58,9 @@ func (p *Push) Asyncable() bool { // 不异步
 }
 
 func (p *Push) Run(ctx *context.Context) (err error) {
-	if _, exists := gfx.Exists().Dir(filepath.Join(p.project.Directory, constant.GitHome)).Build().Check(); !exists { // 是否需要初始化仓库
-		err = p.init(ctx)
-	}
-	if nil != err {
-		return
-	}
-
-	if che := p.checkout(ctx); nil != che { // 签出新代码
+	if ie := p.init(ctx); nil != ie { // 初始化
+		err = ie
+	} else if che := p.checkout(ctx); nil != che { // 签出新代码
 		err = che
 	} else if name, coe := p.commit(ctx); nil != coe { // 提交代码
 		err = coe
@@ -81,7 +76,9 @@ func (p *Push) Run(ctx *context.Context) (err error) {
 }
 
 func (p *Push) init(ctx *context.Context) (err error) {
-	if ie := p.exec(ctx, "init"); nil != ie { // 初始化目录
+	if _, exists := gfx.Exists().Dir(filepath.Join(p.project.Directory, constant.GitHome)).Build().Check(); exists {
+		// 不需要初始化仓库
+	} else if ie := p.exec(ctx, "init"); nil != ie { // 初始化目录
 		err = ie
 	} else if dbe := p.exec(ctx, "config", "init.defaultBranch", "master"); nil != dbe { // 设置默认分支
 		err = dbe

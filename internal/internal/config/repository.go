@@ -1,5 +1,9 @@
 package config
 
+import (
+	"strings"
+)
+
 type Repository struct {
 	// 远程仓库地址
 	Remote string `default:"${GIT_HTTP_URL}" validate:"required" json:"remote,omitempty"`
@@ -19,6 +23,7 @@ func (r *Repository) Checkout() (checkout string) {
 	} else {
 		checkout = r.Branch
 	}
+	checkout = strings.TrimSpace(checkout)
 
 	return
 }

@@ -87,7 +87,12 @@ func (p *Pull) clone(ctx *context.Context) (err error) {
 }
 
 func (p *Pull) checkout(ctx *context.Context) (err error) {
-	arguments := args.New().Build().Subcommand("checkout").Add(p.repository.Checkout())
+	checkout := p.repository.Checkout()
+	if "" == checkout {
+		return
+	}
+
+	arguments := args.New().Build().Subcommand("checkout").Add(checkout)
 	err = p.git.Exec(ctx, arguments.Build())
 
 	return
