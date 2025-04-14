@@ -6,7 +6,7 @@ import (
 
 func init() {
 	pangu.New().Get().Dependency().Puts(
-		newClear,
+		newClean,
 		newCredential,
 		newSSH,
 		newPull,

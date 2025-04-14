@@ -8,7 +8,7 @@ import (
 type Steps struct {
 	pangu.Get
 
-	Clear      *step.Clear
+	Clean      *step.Clean
 	Credential *step.Credential
 	Pull       *step.Pull
 	Push       *step.Push

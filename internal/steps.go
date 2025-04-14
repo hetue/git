@@ -7,7 +7,7 @@ import (
 
 func New(params internal.Steps) []core.Step {
 	return []core.Step{
-		params.Clear,
+		params.Clean,
 		params.Credential,
 		params.SSH,
 		params.Pull,
