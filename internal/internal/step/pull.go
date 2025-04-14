@@ -6,7 +6,9 @@ import (
 	"path/filepath"
 
 	"github.com/goexl/args"
+	"github.com/goexl/exception"
 	"github.com/goexl/gfx"
+	"github.com/goexl/gox/field"
 	"github.com/hetue/core"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/command"
@@ -51,7 +53,10 @@ func (p *Pull) Asyncable() bool { // 不异步
 }
 
 func (p *Pull) Run(ctx *context.Context) (err error) {
-	if cle := p.clone(ctx); nil != cle { // 克隆项目
+	check := gfx.Exists().Reset().Directory(p.project.Directory)
+	if _, exists := check.Build().Check(); !exists { // 检查工作目录是否存在
+		err = exception.New().Message("目录不存在").Field(field.New("filepath", p.project.Directory)).Build()
+	} else if cle := p.clone(ctx); nil != cle { // 克隆项目
 		err = cle
 	} else if che := p.checkout(ctx); nil != che { // 检出提交的代码
 		err = che
@@ -72,7 +77,7 @@ func (p *Pull) clone(ctx *context.Context) (err error) {
 	}
 	// 防止证书错误
 	arguments.Flag("config").Add("http.sslVerify=false")
-	arguments.Add(p.project.Dir)
+	arguments.Add(p.project.Directory)
 	if ee := p.git.Exec(ctx, arguments.Build()); nil != ee {
 		// err = p.again(ctx, arguments.Build())
 		err = ee
@@ -89,7 +94,7 @@ func (p *Pull) checkout(ctx *context.Context) (err error) {
 }
 
 func (p *Pull) update(ctx *context.Context) (err error) {
-	check := gfx.Exists().Dir(filepath.Join(p.project.Dir, constant.GitSubmodulesFilename))
+	check := gfx.Exists().Dir(filepath.Join(p.project.Directory, constant.GitSubmodulesFilename))
 	if _, exists := check.Build().Check(); !exists && p.pull.Submodules { // 是否有子模块配置文件
 		return
 	}

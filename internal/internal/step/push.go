@@ -58,7 +58,7 @@ func (p *Push) Asyncable() bool { // 不异步
 }
 
 func (p *Push) Run(ctx *context.Context) (err error) {
-	if _, exists := gfx.Exists().Dir(filepath.Join(p.project.Dir, constant.GitHome)).Build().Check(); !exists { // 是否需要初始化仓库
+	if _, exists := gfx.Exists().Dir(filepath.Join(p.project.Directory, constant.GitHome)).Build().Check(); !exists { // 是否需要初始化仓库
 		err = p.init(ctx)
 	}
 	if nil != err {
@@ -97,7 +97,7 @@ func (p *Push) init(ctx *context.Context) (err error) {
 }
 
 func (p *Push) checkout(ctx *context.Context) (err error) {
-	dir := field.New("dir", p.project.Dir)
+	dir := field.New("dir", p.project.Directory)
 	p.logger.Debug("是完整的Git仓库，无需初始化和配置", dir)
 	p.logger.Debug("签出目标分支开始", dir)
 	// 签出目标分支
@@ -108,7 +108,7 @@ func (p *Push) checkout(ctx *context.Context) (err error) {
 }
 
 func (p *Push) commit(ctx *context.Context) (name string, err error) {
-	dir := field.New("dir", p.project.Dir)
+	dir := field.New("dir", p.project.Directory)
 	p.logger.Debug("提交代码开始", dir)
 	if ae := p.exec(ctx, "add", "."); nil != ae { // 只添加改变的文件
 		err = ae

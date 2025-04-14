@@ -24,7 +24,7 @@ func NewGit(base *core.Command, binary *config.Binary, project *config.Project) 
 }
 
 func (g *Git) Exec(ctx *context.Context, arguments *args.Arguments) (err error) {
-	command := g.command.New(g.binary.Git).Arguments(arguments).Dir(g.project.Dir)
+	command := g.command.New(g.binary.Git).Arguments(arguments).Dir(g.project.Directory)
 	environment := command.Environment()
 	environment.String(constant.SpeedLimit)
 	environment.String(constant.SpeedTime)

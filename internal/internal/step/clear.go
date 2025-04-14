@@ -39,5 +39,5 @@ func (c *Clear) Asyncable() bool { // 不异步
 }
 
 func (c *Clear) Run(_ *context.Context) error {
-	return os.RemoveAll(filepath.Join(c.project.Dir, constant.GitHome))
+	return os.RemoveAll(filepath.Join(c.project.Directory, constant.GitHome))
 }
