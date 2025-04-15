@@ -68,9 +68,9 @@ func (p *Pull) Run(ctx *context.Context) (err error) {
 }
 
 func (p *Pull) clone(ctx *context.Context) (err error) {
-	arguments := args.New().Build().Subcommand("clone", p.remote())
+	arguments := args.New().Build().Subcommand("clone", p.url())
 	if p.pull.Submodules {
-		arguments.Flag("remote-submodules").Flag("recurse-submodules")
+		arguments.Flag("url-submodules").Flag("recurse-submodules")
 	}
 	if 0 != p.pull.Depth {
 		arguments.Argument("depth", p.pull.Depth)
@@ -104,17 +104,17 @@ func (p *Pull) update(ctx *context.Context) (err error) {
 		return
 	}
 
-	arguments := args.New().Build().Subcommand("submodule", "update").Flag("init", "recursive", "remote")
+	arguments := args.New().Build().Subcommand("submodule", "update").Flag("init", "recursive", "url")
 	err = p.git.Exec(ctx, arguments.Build())
 
 	return
 }
 
-func (p *Pull) remote() (remote string) {
+func (p *Pull) url() (url string) {
 	if constant.Pull == p.project.Mode && "" != p.credential.Key {
-		remote = os.Getenv(constant.DroneSSHUrl)
+		url = os.Getenv(constant.DroneSSHUrl)
 	} else {
-		remote = p.repository.Remote
+		url = p.repository.Url
 	}
 
 	return
