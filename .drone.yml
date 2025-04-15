@@ -50,7 +50,7 @@ environment:
 
 steps:
   - name: 取码
-    image: ccr.ccs.tencentyun.com/hetue/git
+    image: ccr.ccs.tencentyun.com/dronestock/git
     pull: always
 
   - name: 编译
