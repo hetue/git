@@ -122,7 +122,7 @@ func (p *Push) commit(ctx *context.Context) (name string, err error) {
 }
 
 func (p *Push) remote(ctx *context.Context, name string) (err error) {
-	arguments := args.New().Build().Subcommand("remote", "add").Add(name, p.repository.Remote)
+	arguments := args.New().Build().Subcommand("remote", "add").Add(name, p.repository.Url)
 	err = p.git.Exec(ctx, arguments.Build())
 
 	return

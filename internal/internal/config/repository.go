@@ -2,7 +2,7 @@ package config
 
 type Repository struct {
 	// 远程仓库地址
-	Remote string `default:"${GIT_HTTP_URL}" validate:"required" json:"remote,omitempty"`
+	Url string `default:"${GIT_HTTP_URL}" validate:"required,url" json:"url,omitempty"`
 	// 分支
 	Branch string `default:"master" json:"branch,omitempty"`
 	// 提交
