@@ -34,7 +34,7 @@ func (c *Credential) Name() string {
 }
 
 func (c *Credential) Runnable() bool {
-	return "" != c.config.Username && "" != c.config.Password
+	return "" != c.config.Username && "" != c.config.Password // nolint:staticcheck
 }
 
 func (c *Credential) Retryable() bool { // 不重试

@@ -31,7 +31,7 @@ func (p *Project) Pushable() (pushable bool) {
 
 func (p *Project) check() {
 	if entries, re := os.ReadDir(p.Directory); nil == re {
-		p.pushable = 0 != len(entries)
+		p.pushable = 0 != len(entries) // nolint:staticcheck
 	} else if os.IsNotExist(re) {
 		p.pushable = false
 	} else {

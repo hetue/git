@@ -73,7 +73,7 @@ func (p *Pull) clone(ctx *context.Context) (err error) {
 	if p.pull.Submodules {
 		arguments.Flag("remote-submodules").Flag("recurse-submodules")
 	}
-	if 0 != p.pull.Depth {
+	if 0 != p.pull.Depth { // nolint:staticcheck
 		arguments.Argument("depth", p.pull.Depth)
 	}
 	// 防止证书错误

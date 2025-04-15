@@ -61,7 +61,7 @@ func (s *SSH) Run(_ *context.Context) (err error) {
 
 func (s *SSH) makeHome(home string) (err error) {
 	homeField := field.New("home", home)
-	if err = os.MkdirAll(home, os.ModePerm); nil != err {
+	if err = os.MkdirAll(home, 0o750); nil != err {
 		s.logger.Error("创建SSH目录出错", homeField, field.Error(err))
 	}
 
