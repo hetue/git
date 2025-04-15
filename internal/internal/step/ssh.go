@@ -33,7 +33,7 @@ func (*SSH) Name() string {
 }
 
 func (s *SSH) Runnable() bool {
-	return "" != s.credential.Key
+	return "" != s.credential.Key // nolint:staticcheck
 }
 
 func (s *SSH) Retryable() bool { // 不重试
