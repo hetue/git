@@ -126,7 +126,7 @@ func (p *Push) remote(ctx *context.Context, name string) (err error) {
 }
 
 func (p *Push) tag(ctx *context.Context) (err error) {
-	if "" == p.push.Tag {
+	if "" == p.push.Tag { // nolint:staticcheck
 		return
 	}
 

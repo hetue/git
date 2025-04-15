@@ -89,7 +89,7 @@ func (p *Pull) clone(ctx *context.Context) (err error) {
 
 func (p *Pull) checkout(ctx *context.Context) (err error) {
 	checkout := strings.TrimSpace(p.repository.Checkout)
-	if "" == checkout {
+	if "" == checkout { // nolint:staticcheck
 		return
 	}
 
@@ -112,7 +112,7 @@ func (p *Pull) update(ctx *context.Context) (err error) {
 }
 
 func (p *Pull) url() (url string) {
-	if constant.Pull == p.project.Mode && "" != p.credential.Key {
+	if constant.Pull == p.project.Mode && "" != p.credential.Key { // nolint:staticcheck
 		url = os.Getenv(constant.DroneSSHUrl)
 	} else {
 		url = p.repository.Url
