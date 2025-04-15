@@ -16,7 +16,6 @@ LABEL author="storezhang<华寅>" \
     wechat="storezhang" \
     description="Drone持续集成Git插件，增加标签功能以及Github加速功能。同时支持推拉模式"
 
-# 复制文件，复合成一个步骤
 COPY --from=builder /docker /
 
 RUN set -ex \
@@ -37,8 +36,5 @@ RUN set -ex \
     \
     && rm -rf /var/cache/apk/*
 
-# 修改默认参数
-ENV PLUGIN_TIMES 10
-
 # 执行命令
-ENTRYPOINT ["/usr/local/bin/git", "run"]
+ENTRYPOINT /usr/local/bin/fastgit
