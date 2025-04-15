@@ -9,7 +9,7 @@ require (
 	github.com/goexl/gox v1.9.2
 	github.com/goexl/log v0.0.9
 	github.com/hetue/core v0.0.2
-	github.com/pangum/pangu v1.6.0
+	github.com/pangum/pangu v1.6.1
 )
 
 require (
@@ -45,3 +45,5 @@ require (
 	golang.org/x/sys v0.32.0 // indirect
 	golang.org/x/text v0.24.0 // indirect
 )
+
+replace github.com/hetue/core => ../core
