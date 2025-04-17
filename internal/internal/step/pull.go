@@ -10,14 +10,14 @@ import (
 	"github.com/goexl/exception"
 	"github.com/goexl/gfx"
 	"github.com/goexl/gox/field"
-	"github.com/hetue/core"
+	"github.com/hetue/boot"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/command"
 	"github.com/hetue/git/internal/internal/step/internal/constant"
 	"github.com/hetue/git/internal/internal/step/internal/get"
 )
 
-var _ core.Step = (*Pull)(nil)
+var _ boot.Step = (*Pull)(nil)
 
 type Pull struct {
 	git        *command.Git

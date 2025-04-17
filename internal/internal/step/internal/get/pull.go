@@ -1,13 +1,13 @@
 package get
 
 import (
+	"github.com/harluo/di"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/command"
-	"github.com/pangum/pangu"
 )
 
 type Pull struct {
-	pangu.Get
+	di.Get
 
 	Git        *command.Git
 	Repository *config.Repository

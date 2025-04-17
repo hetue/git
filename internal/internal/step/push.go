@@ -10,14 +10,14 @@ import (
 	"github.com/goexl/gox/field"
 	"github.com/goexl/gox/rand"
 	"github.com/goexl/log"
-	"github.com/hetue/core"
+	"github.com/hetue/boot"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/command"
 	"github.com/hetue/git/internal/internal/step/internal/constant"
 	"github.com/hetue/git/internal/internal/step/internal/get"
 )
 
-var _ core.Step = (*Push)(nil)
+var _ boot.Step = (*Push)(nil)
 
 type Push struct {
 	repository *config.Repository
@@ -86,7 +86,7 @@ func (p *Push) init(ctx *context.Context) (err error) {
 		err = cue
 	} else if cee := p.exec(ctx, "config", "user.email", p.push.Email); nil != cee { // 设置邮箱
 		err = cee
-	} else if cae := p.exec(ctx, "config", "core.autocrlf", "false"); nil != cae { // 设置换行符
+	} else if cae := p.exec(ctx, "config", "boot.autocrlf", "false"); nil != cae { // 设置换行符
 		err = cae
 	}
 

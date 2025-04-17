@@ -9,18 +9,18 @@ import (
 
 	"github.com/goexl/gox/field"
 	"github.com/goexl/log"
-	"github.com/hetue/core"
+	"github.com/hetue/boot"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/constant"
 )
 
 type SSH struct {
-	runtime    *core.Runtime
+	runtime    *boot.Runtime
 	credential *config.Credential
 	logger     log.Logger
 }
 
-func newSSH(runtime *core.Runtime, credential *config.Credential, logger log.Logger) *SSH {
+func newSSH(runtime *boot.Runtime, credential *config.Credential, logger log.Logger) *SSH {
 	return &SSH{
 		runtime:    runtime,
 		credential: credential,

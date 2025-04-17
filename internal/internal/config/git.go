@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/pangum/pangu"
+	"github.com/harluo/boot"
 )
 
 type Git struct {
@@ -14,7 +14,7 @@ type Git struct {
 	Binary *Binary `default:"{}" json:"binary,omitempty"`
 }
 
-func newGit(config *pangu.Config) (git *Git, err error) {
+func newGit(config *boot.Config) (git *Git, err error) {
 	git = new(Git)
 	err = config.Build().Get(git)
 

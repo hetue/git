@@ -8,20 +8,20 @@ import (
 	"github.com/goexl/gox"
 	"github.com/goexl/gox/field"
 	"github.com/goexl/log"
-	"github.com/hetue/core"
+	"github.com/hetue/boot"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/constant"
 )
 
-var _ core.Step = (*Credential)(nil)
+var _ boot.Step = (*Credential)(nil)
 
 type Credential struct {
-	runtime *core.Runtime
+	runtime *boot.Runtime
 	config  *config.Credential
 	logger  log.Logger
 }
 
-func newCredential(runtime *core.Runtime, credential *config.Credential, logger log.Logger) *Credential {
+func newCredential(runtime *boot.Runtime, credential *config.Credential, logger log.Logger) *Credential {
 	return &Credential{
 		runtime: runtime,
 		config:  credential,

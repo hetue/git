@@ -2,13 +2,13 @@ package get
 
 import (
 	"github.com/goexl/log"
+	"github.com/harluo/di"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/command"
-	"github.com/pangum/pangu"
 )
 
 type Push struct {
-	pangu.Get
+	di.Get
 
 	Repository *config.Repository
 	Project    *config.Project

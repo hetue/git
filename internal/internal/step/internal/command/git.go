@@ -4,18 +4,18 @@ import (
 	"context"
 
 	"github.com/goexl/args"
-	"github.com/hetue/core"
+	"github.com/hetue/boot"
 	"github.com/hetue/git/internal/internal/config"
 	"github.com/hetue/git/internal/internal/step/internal/constant"
 )
 
 type Git struct {
-	command *core.Command
+	command *boot.Command
 	binary  *config.Binary
 	project *config.Project
 }
 
-func NewGit(base *core.Command, binary *config.Binary, project *config.Project) *Git {
+func NewGit(base *boot.Command, binary *config.Binary, project *config.Project) *Git {
 	return &Git{
 		command: base,
 		binary:  binary,
