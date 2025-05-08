@@ -16,16 +16,18 @@ import (
 var _ boot.Step = (*Credential)(nil)
 
 type Credential struct {
-	runtime *boot.Runtime
-	config  *config.Credential
-	logger  log.Logger
+	runtime    *boot.Runtime
+	credential *config.Credential
+	repository *config.Repository
+	logger     log.Logger
 }
 
-func newCredential(runtime *boot.Runtime, credential *config.Credential, logger log.Logger) *Credential {
+func newCredential(runtime *boot.Runtime, credential *config.Credential, repository *config.Repository, logger log.Logger) *Credential {
 	return &Credential{
-		runtime: runtime,
-		config:  credential,
-		logger:  logger,
+		runtime:    runtime,
+		credential: credential,
+		repository: repository,
+		logger:     logger,
 	}
 }
 
@@ -34,7 +36,7 @@ func (c *Credential) Name() string {
 }
 
 func (c *Credential) Runnable() bool {
-	return "" != c.config.Username && "" != c.config.Password // nolint:staticcheck
+	return "" != c.credential.Username && "" != c.credential.Password // nolint:staticcheck
 }
 
 func (c *Credential) Retryable() bool { // 不重试
@@ -51,16 +53,28 @@ func (c *Credential) Run(_ *context.Context) (err error) {
 		_ = os.Remove(filepath)
 	}
 
-	content := fmt.Sprintf(constant.NetrcConfigFormatter, c.config.Username, c.config.Password)
 	fields := gox.Fields[any]{
 		field.New("filepath", filepath),
-		field.New("username", c.config.Username),
-		field.New("password", c.config.Password),
+		field.New("username", c.credential.Username),
+		field.New("password", c.credential.Password),
 	}
-	if err = os.WriteFile(filepath, []byte(content), constant.DefaultFilePerm); nil != err {
+
+	if content, gce := c.getContent(); nil != gce {
+		err = gce
+	} else if err = os.WriteFile(filepath, []byte(content), constant.DefaultFilePerm); nil != err {
 		c.logger.Error("写入授权文件出错", fields.Add(field.Error(err))...)
 	} else {
 		c.logger.Info("写入授权文件成功", fields...)
+	}
+
+	return
+}
+
+func (c *Credential) getContent() (content string, err error) {
+	if host, he := c.repository.Host(); nil != he {
+		err = he
+	} else {
+		content = fmt.Sprintf(constant.NetrcConfigFormatter, host, c.credential.Username, c.credential.Password)
 	}
 
 	return
