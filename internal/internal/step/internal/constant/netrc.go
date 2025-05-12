@@ -1,3 +1,3 @@
 package constant
 
-const NetrcConfigFormatter = "machine %s login %s password %s"
+const NetrcConfigFormatter = "default login %s password %s"

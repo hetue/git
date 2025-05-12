@@ -59,22 +59,11 @@ func (c *Credential) Run(_ *context.Context) (err error) {
 		field.New("password", c.credential.Password),
 	}
 
-	if content, gce := c.getContent(); nil != gce {
-		err = gce
-	} else if err = os.WriteFile(filepath, []byte(content), constant.DefaultFilePerm); nil != err {
+	content := fmt.Sprintf(constant.NetrcConfigFormatter, c.credential.Username, c.credential.Password)
+	if err = os.WriteFile(filepath, []byte(content), constant.DefaultFilePerm); nil != err {
 		c.logger.Error("写入授权文件出错", fields.Add(field.Error(err))...)
 	} else {
 		c.logger.Info("写入授权文件成功", fields...)
-	}
-
-	return
-}
-
-func (c *Credential) getContent() (content string, err error) {
-	if host, he := c.repository.Host(); nil != he {
-		err = he
-	} else {
-		content = fmt.Sprintf(constant.NetrcConfigFormatter, host, c.credential.Username, c.credential.Password)
 	}
 
 	return
