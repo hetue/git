@@ -4,7 +4,7 @@ go 1.24
 
 require (
 	github.com/goexl/args v0.0.3
-	github.com/goexl/exception v0.0.3
+	github.com/goexl/exception v0.0.4
 	github.com/goexl/gfx v0.2.8
 	github.com/goexl/gox v1.9.2
 	github.com/goexl/log v0.0.9
