@@ -7,7 +7,7 @@ require (
 	github.com/goexl/exception v0.0.3
 	github.com/goexl/gfx v0.2.8
 	github.com/goexl/gox v1.9.2
-	github.com/goexl/log v0.0.9
+	github.com/goexl/log v0.1.0
 	github.com/hetue/core v0.0.2
 	github.com/pangum/pangu v1.6.0
 )
